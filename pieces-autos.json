@@ -43,5 +43,14 @@
         "description": "Performances d’essuyage au top ! Longueur : 550 mm.",
         "disponibilite": true,
         "image": "images/balai-essuie-glace.png"
+    },
+    {
+        "id": 6,
+        "nom": "Filtre à air",
+        "prix": 15.5,
+        "categorie": "Moteur",
+        "description": "Pour une meilleure filtration de l’air.",
+        "disponibilite": true,
+        "image": "images/filtre-air.png"
     }
 ]
