@@ -1,6 +1,10 @@
+import { ajoutListenerEnvoyerAvis, ajoutListenersAvis } from "./avis.js";
+
 // Récupération des pièces depuis le fichier JSON
-const reponse = await fetch("pieces-autos.json");
+const reponse = await fetch("http://localhost:8081/pieces/");
 const pieces = await reponse.json();
+// on appel la fonction pour ajouter le listener au formulaire
+ajoutListenerEnvoyerAvis();
 
 function genererPieces(pieces) {
     for (let i = 0; i < pieces.length; i++) {
@@ -27,23 +31,28 @@ function genererPieces(pieces) {
         stockElement.innerText = article.disponibilite
             ? "En stock"
             : "Rupture de stock";
+        //Code ajouté
+        const avisBouton = document.createElement("button");
+        avisBouton.dataset.id = article.id;
+        avisBouton.textContent = "Afficher les avis";
 
         // On rattache la balise article a la section Fiches
         sectionFiches.appendChild(pieceElement);
-        // On rattache l’image à pieceElement (la balise article)
         pieceElement.appendChild(imageElement);
         pieceElement.appendChild(nomElement);
         pieceElement.appendChild(prixElement);
         pieceElement.appendChild(categorieElement);
-        //Ajout des éléments au DOM pour l'exercice
         pieceElement.appendChild(descriptionElement);
         pieceElement.appendChild(stockElement);
+        //Code aJouté
+        pieceElement.appendChild(avisBouton);
     }
+    ajoutListenersAvis();
 }
 
 genererPieces(pieces);
 
-//gestion des bouttons
+//gestion des boutons
 const boutonTrier = document.querySelector(".btn-trier");
 
 boutonTrier.addEventListener("click", function () {
